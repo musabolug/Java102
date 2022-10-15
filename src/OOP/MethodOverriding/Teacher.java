@@ -1,8 +1,10 @@
-package OOP.Inheritance;
+package OOP.MethodOverriding;
 
-public class Teacher extends Academist{
+import OOP.MethodOverriding.Academist;
+
+public class Teacher extends Academist {
     private String doorNo;
-    public Teacher(String nameSurname,String phoneNo, String email,String doorNo){
+    public Teacher(String nameSurname, String phoneNo, String email, String doorNo){
         super(nameSurname, phoneNo, email);
         this.doorNo = doorNo;
     }

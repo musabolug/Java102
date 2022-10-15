@@ -1,4 +1,9 @@
-package OOP.Inheritance;
+package OOP.Polymorphism;
+
+import OOP.Inheritance.Assistant;
+import OOP.Inheritance.Officer;
+import OOP.Inheritance.SecurityGuard;
+import OOP.Inheritance.Teacher;
 
 public class Main {
 
@@ -14,8 +19,17 @@ public class Main {
         Assistant assistant1 = new Assistant("Muaz Olug","05052150205","muazolug@gnail.com","10:0-18:00");
         SecurityGuard guard = new SecurityGuard("Binbasi Ozcelik","05446663322","ozcelik@gmail.com","Security","19:00- 07:00","Guard");
 
+      //  e1.enterance("10:00"); // THİS İS AN EXAMPLE FOR OVERLOADING
 
+      //  a1.enterance(); // OVERRİDE EXAMPLE
 
+        // Polymorphism Example
+       Employee employee = new Academist("Celal Sengor","05125550205","ilberhoca@gmail.com");
+      //  employee.enterance();
+
+        Employee[] loginUser = {e1,a1,employee};
+
+        Employee.loginUsers(loginUser);
 
     }
 
