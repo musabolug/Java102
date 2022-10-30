@@ -78,15 +78,27 @@ public class Product {
         System.out.println("2 - Add items");
         System.out.println("3 - Delete items");
         System.out.println("4 - Filter items");
-        System.out.print("Your Choice");
+        System.out.print("Your Choice: ");
         int choice = input.nextInt();
         System.out.println();
 
         switch (choice){
             case 1:
                 listItems(selection);
+                break;
             case 2:
                 addItems(selection);
+                break;
+            case 3:
+                deleteItems(selection);
+                break;
+            case 4:
+                filterItems(selection);
+                break;
+            default:
+                System.out.println();
+                System.out.println("There is such an option. Please enter your choice again");
+                proccesMenu(selection);
         }
 
 
@@ -105,9 +117,9 @@ public class Product {
                     String productName = product.getNameBrand()+" "+ product.getModel();
                     product.setName(productName);
 
-                    System.out.printf("| %-2s | %-30s | %-10s TL | %-10s | %-12s | %-10s |\n",
+                    System.out.printf("| %-2s | %-30s| %-15s TL | %-10s| %-10s| %-12s | %-10s |\n",
                             product.getId(),product.getName(),product.getPrice(),product.getNameBrand(),
-                            product.getStorage(),product.getScreenSize(),product.getRam());
+                            product.getStorage(),product.getScreenSize(), product.getRam());
                 }
                 System.out.println("----------------------------------------------------------------------------------------------------------");
             }
@@ -115,16 +127,16 @@ public class Product {
         }
         else {
             //Telephone
-            System.out.println("----------------------------------------------------------------------------------------------------------");
-            System.out.println("| ID | Product Name                   | Price      | Brand      | Storage    | Screen Size  | RAM        |");
-            System.out.println("----------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("| ID | Product Name                   | Price      | Brand      | Storage    | Screen Size  | Camera     | Battery    | RAM        | COLOR      |");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
             ArrayList<Product> productList = products.get("telephone");
             if (!productList.isEmpty()){
                 for (Product product: productList){
                     String productName = product.getNameBrand()+" "+ product.getModel();
                     product.setName(productName);
 
-                    System.out.printf("| %-2s | %-30s| %-10s TL | %-10s| %-10s| %-12s | %-10s | %-10s | %-10s | %-10s |\n",
+                    System.out.printf("| %-2s | %-30s| %-15s TL | %-10s| %-10s| %-12s | %-10s | %-10s | %-10s | %-10s |\n",
                             product.getId(),product.getName(),product.getPrice(),product.getNameBrand(),
                             product.getStorage(),product.getScreenSize(),product.getCamera(),product.getBattery(),
                             product.getRam(),product.getColor());
@@ -148,7 +160,7 @@ public class Product {
         String nameBrandInput = input.next();
         input.nextLine();
         System.out.print("Model :");
-        String modelInput = input.next();
+        String modelInput = input.nextLine();
         System.out.print("Storage :");
         int storageInput =input.nextInt();
         System.out.print("Screen size :");
@@ -161,7 +173,7 @@ public class Product {
             idNotebook +=1;
             int id = idNotebook;
 
-            Product newNotebook = new Product(id,priceInput, discountRateInput, stockInput, modelInput, nameBrandInput, storageInput, screenSizeInput, RamInput);
+            Product newNotebook = new Product(idNotebook,priceInput, discountRateInput, stockInput, modelInput, nameBrandInput, storageInput, screenSizeInput, RamInput);
             products.get("Notebook").add(newNotebook);
         }
         else {
@@ -176,7 +188,7 @@ public class Product {
             System.out.print("Color :");
             String colorInput = input.nextLine();
 
-            Product newTelephone = new Product(id, priceInput, discountRateInput, stockInput, modelInput, nameBrandInput, storageInput, screenSizeInput, cameraInput, batteryInput, RamInput, colorInput);
+            Product newTelephone = new Product(idTelephone, priceInput, discountRateInput, stockInput, modelInput, nameBrandInput, storageInput, screenSizeInput, cameraInput, batteryInput, RamInput, colorInput);
             products.get("Telephone").add(newTelephone);
         }
 
@@ -276,11 +288,37 @@ public class Product {
     }
     public static void listFilteredItems(int selection,ArrayList<Product> filteredProductList){
         if (selection%2 != 0){
+            //Notebook
             System.out.println("---------------------------------------------------------------------------------------------------------------");
             System.out.println("| ID | Product Name                   | Price           | Brand      | Storage    | Screen Size  | RAM        |");
             System.out.println("---------------------------------------------------------------------------------------------------------------");
+            if(filteredProductList.isEmpty()){
+                for (Product product : filteredProductList){
+                    System.out.printf("| %-2s | %-30s| %-15s TL | %-10s| %-10s| %-12s | %-10s |\n",
+                            product.getId(),product.getName(),product.getPrice(),product.getNameBrand(),product.getStorage(),
+                            product.getScreenSize(),product.getRam());
+                }
+                System.out.println("---------------------------------------------------------------------------------------------------------------");
+            }
+            System.out.println();
+        }
+        else {
+            // Telephone
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("| ID | Product Name                   | Price      | Brand      | Storage    | Screen Size  | Camera     | Battery    | RAM        | COLOR      |");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 
+            if (filteredProductList.isEmpty()){
+                for (Product product : filteredProductList){
+                    System.out.printf("| %-2s | %-30s| %-15s TL | %-10s| %-10s| %-12s | %-10s | %-10s | %-10s | %-10s |\n",
+                            product.getId(),product.getName(),product.getPrice(),product.getNameBrand(),
+                            product.getStorage(),product.getScreenSize(),product.getCamera(),product.getBattery(),
+                            product.getRam(),product.getColor());
+                }
+                System.out.println("---------------------------------------------------------------------------------------------------------------");
 
+            }
+            System.out.println();
         }
     }
     public static Scanner getInput() {
