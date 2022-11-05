@@ -1,16 +1,14 @@
 package InsuranceManagementSystem;
-import java.util.Calendar;
 import java.util.Date;
-public class HealthInsurance extends Insurance{
-
-    public HealthInsurance(String insuranceType) {
-        super("Sağlık sigortası", new Date(), new Date());
+public class TravelInsurance extends Insurance {
+    public TravelInsurance(String insuranceType) {
+        super("Seyahat sigortası", new Date(), new Date());
         calculate(insuranceType);
     }
 
     @Override
     public void calculate(String insuranceType) {
-        double price=999.99;
+        double price=699.99;
         if(insuranceType.equals("Individual"))
         {
             setPrice(price);
@@ -19,6 +17,4 @@ public class HealthInsurance extends Insurance{
             setPrice(price*0.9);
         }
     }
-
 }
-

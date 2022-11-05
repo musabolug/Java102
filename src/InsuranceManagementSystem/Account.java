@@ -1,81 +1,74 @@
 package InsuranceManagementSystem;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.*;
+
+import InsuranceManagementSystem.*;
+
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class Account implements Comparable<Account> {
-    //"Account" sınıfında müşteri bilgilerini ekrana yazdıran "final" tipinde,
-    // değer döndürmeyen ve ismi "showUserInfo" bir fonksiyon tanımlayınız.
-
-
-    //"Account" sınıfında müşterilerin yaptırdıkları sigortaları liste halinde saklayınız.
-    // Sigortayı temsil eden "Insurance" isminde bir soyut sınıf tasarlayınız. Bu soyut sınıf içinde
-
-    //"Account" sınıfında müşterilerin yaptırdıkları sigortaları liste halinde saklayınız.
-
-    //kullanıcının login olma durumu (AuthenticationStatus)
-    //kullanıcı nesnesi (User)
-    //kullanıcının yaptırmış olduğu sigortaların listesi (ArrayList)
-
-
-    //AuthenticationStatus tipinde bir enum tanımlayınız.
-    // Enum içinde SUCCESS ve FAIL isminde iki tane sabit tanımlayın.
-    // SUCCESS login işlemi başarılı ise kullanılacaktır. FAIL ise login olmamışsa kullanılacaktır.
-
-
-    //kullanıcının sigorta poliçesi ekleyebilmesi için soyut (abstract) bir fonksiyon tanımlanacaktır.
-    // Bu soyut sınıf "Individual" ve "Enterprise" isimli alt sınıflarda override edilerek doldurulacaktır.
-    // Çünkü, bireysel ve kurumsal müşterilerin ekledikleri paketlerin fiyatlarına uygulanan kar marjı farklı olacaktır.
-
-
-    //"Account" sınıfından nesneleri TreeSet içinde tutacağımız için "Comparable" interface'den kalıtım almış olmasın
-    // a dikkat edin. Ayrıca, "Account" sınıfının "hashCode" ve "equals" fonksiyonlarını doldurmayı unutmayın.
-
-    enum AuthenticationStatus(SUCCESS,FAIL);
+    protected Scanner scanner=new Scanner(System.in);
     private User user;
-    private List<Insurance> insurances;
-    private AuthenticationStatus status;
+    private ArrayList<Individual> individualList;
+    private AuthenticationStatus status=AuthenticationStatus.FAIL;
 
-    public User getUser(){
+    enum AuthenticationStatus{
+        FAIL,
+        SUCCESS;
+    }
+
+    public Account(User user){
+        this.user=user;
+    }
+
+    public void addAddress(){
+        AddressManager.addAddress(this.user);
+    }
+    public void deleteAddress(){
+        printAddresses();
+        System.out.print("Silmek istediğiniz adresin id numarasını yazın : ");
+        int id=scanner.nextInt();
+        AddressManager.deleteAddress(user,id);
+    }
+
+    public void login(String email,String password,Account account) throws InvalidAuthenticationException {
+        if(account.getUser().getEmail().equals(email) && account.getUser().getPassword().equals(password)){
+            status=AuthenticationStatus.SUCCESS;
+        }
+        else throw new InvalidAuthenticationException("Giriş islemi basarisiz.");
+    }
+
+    public final void showUserInfo(){
+        System.out.println("Kullanici adi soyadi : "+user.getFirstName()+" "+user.getLastName());
+        System.out.println("E-mail : "+user.getEmail()+" Meslegi : "+ user.getJob());
+        System.out.println("Yas : "+ user.getAge()+" Son giris tarihi : "+ user.getLastEntry()+" Uyelik turu : "+user.getMembership());
+        printInsurances();
+        printAddresses();
+    }
+    public void printAddresses(){
+        for (Address address: user.getAddressList()){
+            address.showAddressInfo();
+        }
+    }
+
+    public void printInsurances(){
+        for(Insurance insurance: user.getInsuranceList()){
+            System.out.println("Sigorta Turu : "+insurance.getName()+", ucreti : "+ insurance.getPrice()+
+                    ", Baslangic Tarihi : "+insurance.getStartDate()+", Bitis Tarihi : "+ insurance.getFinishDate());
+        }
+    }
+
+    public abstract void addPolicy();
+
+    public User getUser() {
         return user;
     }
-    public void setUser(User user){
+
+    public void setUser(User user) {
         this.user = user;
     }
-    public List<Insurance> getInsurances(){
-        return insurances;
-    }
-    public void setInsurances(List<Insurance> insurances){
-        this.insurances=insurances;
-    }
-    public AuthenticationStatus getStatus(){
-        return status;
-    }
-    public void setStatus(AuthenticationStatus status){
-        this.status = status;
-    }
-
-    public final showUserInfo(){
-        System.out.println("Account Information:"+
-                "\nName : "+user.getName()+
-                "\nSurname : "+user.getSurName()+
-                "\nEmain : "+user.getEmail()+
-                "\nProfefssion : "+user.getProfession()+
-                "\nAge : " +user.getAge()+
-                "\nLast Entery Date : "+user.getLastLogin());
-        for (Adress adress : user.getAdress()){
-            System.out.println(adress.getAdress());
-        }
-
-    }
-
-
-
-
-    public void login(String email, String password){
-
-    }
-
-
-
 }

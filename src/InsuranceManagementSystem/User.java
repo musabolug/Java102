@@ -1,46 +1,50 @@
 package InsuranceManagementSystem;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
-    private String name;
-    private String surName;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
-    private String profession;
+    private String job;
     private int age;
-    private Date lastLogin = null;
+    private String membership;
+    private ArrayList<Address> addressList=new ArrayList<>();
+    private Date lastEntry;
+    private Address addresses;
+    private Insurance insurance;
+    private ArrayList<Insurance> insuranceList=new ArrayList<>();
 
-
-    private ArrayList<Adress> adress ;
-    public User(String name, String surName,String email, String password ,String profession,int age){
-        this.name =name;
-        this.surName =surName;
-        this.email = email;
-        this.password = password;
-        this.profession=profession;
-        this.age =age;
-        this.adress = new ArrayList<>();
+    public User(String firstName,String lastName,String email,String password,String job,int age,Address address,String membership){
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
+        this.password=password;
+        this.job=job;
+        this.age=age;
+        this.addresses=address;
+        this.addressList.add(address);
+        this.lastEntry =new Date(System.currentTimeMillis());
+        this.membership=membership;
     }
 
 
-
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -59,12 +63,12 @@ public class User {
         this.password = password;
     }
 
-    public String getProfession() {
-        return profession;
+    public String getJob() {
+        return job;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession;
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public int getAge() {
@@ -74,13 +78,44 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
-    public Date getLastLogin(){
-        return lastLogin;
+
+    public ArrayList<Address> getAddressList() {
+        return addressList;
     }
-    public void setLastLogin(Date lastLogin){
-        this.lastLogin = lastLogin;
+
+    public void setAddressList(Address addressList) {
+        this.addressList.add(addressList);
     }
-    public ArrayList<Adress> getAdress(){
-        return adress;
+
+    public Date getLastEntry() {
+        return lastEntry;
+    }
+
+    public Address getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Address addresses) {
+        this.addresses = addresses;
+    }
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
+    }
+
+    public ArrayList<Insurance> getInsuranceList() {
+        return insuranceList;
+    }
+
+    public void setInsuranceList(Insurance insurance) {
+        this.insuranceList.add(insurance);
+    }
+
+    public String getMembership(){
+        return this.membership;
     }
 }
