@@ -13,10 +13,11 @@ public class Main {
 
         ExecutorService pool = Executors.newFixedThreadPool(50);
 
+
         for (int i = 0; i<100;i++){
          pool.execute(orderMatic);
         }
-        pool.shutdown(); // Bitmediği için otomatik kapama
+      //  pool.shutdown(); // Bitmediği için otomatik kapama
 
         // Uygulamamız çalışırken belli miktarda bir Thread ile sınırlandırmak isteyebiliriz.
         //Bu nedenle Thread havuzu oluşturup bu havuzu önceden oluşturulmuş ve kullanıma hazır
