@@ -44,8 +44,8 @@ public class Example extends  JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("Butona Basildi");
-               // System.out.println(fld_username.getText());
-              //  System.out.println(fld_password.getText());
+                System.out.println(fld_username.getText());
+                System.out.println(fld_password.getText());
 
                 if (fld_username.getText().length() == 0 || fld_password.getText().length() == 0){
                     JOptionPane.showMessageDialog(null,"Tum alanlari doldurun !","Hata",JOptionPane.INFORMATION_MESSAGE);
