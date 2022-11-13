@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class Example extends  JFrame{
 
-    private JPanel wrapper;
+    private JPanel wrapper1;
     private JPanel wbottom;
     private JPanel wtop;
     private JTextField fld_username;
@@ -29,7 +29,7 @@ public class Example extends  JFrame{
                 throw new RuntimeException(e);
             }
         }
-        setContentPane(wrapper);
+        setContentPane(wrapper1);
         setSize(550 ,300);
         setTitle("Uygulama Adi");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

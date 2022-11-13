@@ -15,7 +15,7 @@ public class Main {
         //DATABASE BAĞLAMAK
         Connection connection = null;
         String sql = "SELECT * FROM actor";
-        String insertSql  = "INSERT INTO actor (first_name,last_name) VALUES ('Musab','Olug') ";
+        String insertSql  = "INSERT INTO actor (first_name,last_name) VALUES  ('Musab','Olug') ";
         String preparedSql  = "INSERT INTO actor (first_name,last_name) VALUES (?,?) ";
         String setSql = "UPDATE actor SET first_name='Mansur' WHERE actor_id =201";
         String preparedSetSql ="UPDATE actor SET first_name=? WHERE actor_id = ?";
